@@ -158,27 +158,25 @@ export default logo;
 <----------------------------------------->
 // Components with state
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import classes from "./style.css";
 
 class ClassName extends Component {
-	state = {
-        purchasing: false,
-	}
+state = {
+    purchasing: false,
+}
 
-	componentDidMount() {
-        this.props.onInitIngredients();
-	}
+componentDidMount() {
+    this.props.onInitIngredients();
+}
 
-    render () {
-        return (
-            <Aux>
-                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancleHandler} >
-                </Modal>
-            </Aux>
-		);
-    }
+render () {
+    return (
+        <Aux>
+            <Modal show={this.state.purchasing} modalClosed={this.purchaseCancleHandler} >
+            </Modal>
+        </Aux>
+	);
+}
 };
 
 export default ClassName;
