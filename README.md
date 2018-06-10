@@ -180,4 +180,56 @@ render () {
 };
 
 export default ClassName;
+
+<------------------------------------------------->
+// Using map function
+import React from 'react';
+import Card from '../Card/Card';
+import { robots } from '../../../data/robots';
+
+const CardList = () => {
+    const cardsArray = robots.map((robot) => {
+        return (
+			<Card 
+				key={robot.id} 
+				id={robot.id} 
+				name={robot.name} 
+				email={robot.email} />
+		)
+    });
+    return (
+        <div>
+            {cardsArray}
+        </div>
+    )
+};
+
+
+export default CardList;
+
+```
+
+#### Error Boundry
+
+```javascript
+import React, { Component } from 'react';
+
+class ErrorBoundry extends Component {
+  state = {
+    hasError: false
+  }
+
+  componentDidCatch(error, info) {
+      this.setState({hasError: true})
+  }
+  render() {
+    if(this.state.hasError) {
+        return <h1>Upps. Error occured.</h1>
+    }
+    return this.props.children
+
+  }
+}
+
+export default ErrorBoundry;
 ```
