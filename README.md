@@ -116,9 +116,21 @@ Remove image metadata - www.verexif.com
 
 [Prefetching](https://css-tricks.com/prefetching-preloading-prebrowsing/)
 
-## React
+###### Code Optimizing/Splitting
+
+[async  or defer ](https://stackoverflow.com/questions/10808109/script-tag-async-defer)
+
+[code-splitting](https://reactjs.org/docs/code-splitting.html)
+
+[React-check-update-tool](https://github.com/maicki/why-did-you-update)
+
+# React
+
+[Reac-nice-doc](https://vasanthk.gitbooks.io/react-bits/patterns/19.async-nature-of-setState.html)
 
 [Components](https://mdbootstrap.com/react/components/breadcrumb/)
+
+[React-check-update-tool](https://github.com/maicki/why-did-you-update)
 
 ```code
 sudo npm install create-react-app -g
@@ -429,3 +441,12 @@ module.export = {
 npm start
 ```
 
+# Progressive Web Apps (PWA)
+
+[PWA-builder](https://www.pwabuilder.com/)
+
+[Favicon Generator](https://realfavicongenerator.net/)
+
+[Best-Practic](https://auth0.com/blog/introduction-to-progressive-web-apps-push-notifications-part-3/)
+
+# Testing
