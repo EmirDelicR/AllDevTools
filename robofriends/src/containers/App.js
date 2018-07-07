@@ -5,6 +5,7 @@ import SearchBox from '../components/UI/SearchBox/SearchBox';
 import Scroll from '../components/UI/Scroll/Scroll';
 import ErrorBoundry from '../components/ErrorBoundry/ErrorBoundry';
 import * as actions from '../store/actions/index';
+import Header from '../components/UI/Header/Header';
 
 class App extends Component {
 
@@ -21,7 +22,7 @@ class App extends Component {
       <h1>Loading</h1> :
       (
       <div className='tc' >
-        <h1 className='f1'>RoboFriends</h1>
+        <Header />
         <SearchBox searchChange={this.props.onSearchChange} />
         <Scroll>
           <ErrorBoundry>
