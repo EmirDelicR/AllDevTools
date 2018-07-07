@@ -450,3 +450,82 @@ npm start
 [Best-Practic](https://auth0.com/blog/introduction-to-progressive-web-apps-push-notifications-part-3/)
 
 # Testing
+
+##### Unit Tests
+
+Tests individual classes or functions
+
+##### Integration Tests
+
+Testing how different pieces of code work with each other
+
+##### Automation Tests
+
+Test behavior of the web (selenium test, TestCafe, WebDriver IO)
+
+##### Tools
+
+- Jasmine (need coverage library) (BDD)
+- Jest (BDD)
+- Mocha (need assertion , mock and code coverage library) (BDD)
+
+### JEST
+
+[Official wep page](https://jestjs.io/) 
+
+[Jest Cheat Sheet](https://github.com/sapegin/jest-cheat-sheet)
+
+```console
+// With create-react-app JEST is already setup
+npm install --save-dev jest
+
+// in the package.json file
+"scripts" : {
+    "test" : "jest --watch *.js"
+}
+// If you use Ubuntu and throw an error call this:
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+// write a test in script.test.js
+it('this is the test', () => {
+
+});
+// Run
+npm test
+```
+
+##### Enzyme
+
+[Enzyme](https://github.com/airbnb/enzyme)
+
+```console
+npm install --save-dev enzyme enzyme-adapter-react-16
+npm install --save-dev react-addons-test-utils react-test-renderer
+// check setupEnzymeTest.js file
+/*
+package.json has
+
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.3.2"
+  },
+Note: The jest > setupTestFrameworkScriptFile key in package.json must not be there, remove if it exists.
+
+\src\setupTests.js has
+
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+configure({ adapter: new Adapter() });
+*/
+```
+To test components use:
+```javascript
+import { shallow, mount, render } from 'enzyme';
+// look card.test.js
+```
