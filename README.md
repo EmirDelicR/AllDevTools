@@ -2,11 +2,19 @@
 Dev-tools and best practice
 
 [PERFORMANCE](#performance)
+
 [REACT](#react)
+
+[WEBPAC-4](#webpack-4)
+
 [PWA](#progressive-web-apps)
+
 [Testing](#testing)
+
 [TypeScript](#type-script)
+
 [SPA vs SSR](#spa-vs-server-side-rendering)
+
 # SSH
 
 How SSH work
@@ -270,7 +278,7 @@ npm install --save redux
 npm install --save react-redux
 ```
 
-###### Redux Middleware
+##### Redux Middleware
 
 ```javascript
 // index.js
@@ -292,7 +300,7 @@ const logger = store => {
 const store = createStore(robotsReducer, applyMiddleware(logger));
 ```
 
-###### Async Actions
+##### Async Actions
 
 ```console
 npm install --save redux-thunk
@@ -363,7 +371,7 @@ const mapDispatchToProps = dispatch => {
 };
 ```
 
-###### React Tools
+##### React Tools
 
 1. [React Router](https://reacttraining.com/react-router/web/example/basic)
 2. [Ramda](https://ramdajs.com/docs/) 
@@ -374,7 +382,7 @@ const mapDispatchToProps = dispatch => {
 7. [React-reselect](https://github.com/reduxjs/reselect)
 8. [Redux Saga](https://github.com/redux-saga/redux-saga)
 
-###### Webpack 4 
+#webpack-4 
 
 [webpack](https://webpack.js.org/)
 
