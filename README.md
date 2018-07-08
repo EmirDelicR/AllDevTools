@@ -1,6 +1,12 @@
 # AllDevTools
 Dev-tools and best practice
 
+[PERFORMANCE](#performance)
+[REACT](#react)
+[PWA](#progressive-web-apps)
+[Testing](#testing)
+[TypeScript](#type-script)
+[SPA vs SSR](#spa-vs-server-side-rendering)
 # SSH
 
 How SSH work
@@ -94,7 +100,7 @@ Commands :
         sudo service ssh restart	
 ```
 
-# PERFORMANCE
+#performance
 
 #### Network 
 
@@ -124,7 +130,7 @@ Remove image metadata - www.verexif.com
 
 [React-check-update-tool](https://github.com/maicki/why-did-you-update)
 
-# React
+#react
 
 [Reac-nice-doc](https://vasanthk.gitbooks.io/react-bits/patterns/19.async-nature-of-setState.html)
 
@@ -441,7 +447,7 @@ module.export = {
 npm start
 ```
 
-# Progressive Web Apps (PWA)
+#progressive-web-apps
 
 [PWA-builder](https://www.pwabuilder.com/)
 
@@ -449,7 +455,7 @@ npm start
 
 [Best-Practic](https://auth0.com/blog/introduction-to-progressive-web-apps-push-notifications-part-3/)
 
-# Testing
+#testing
 
 ##### Unit Tests
 
@@ -569,4 +575,95 @@ look at actions.test.js
 
 npm install --save-dev redux-mock-store
 
-# TypeScript
+#type-script
+
+[TSsetup](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
+
+[Doc](https://basarat.gitbooks.io/typescript/docs/why-typescript.html)
+
+[Types](https://definitelytyped.org/)
+
+```console
+npm install -g typescript
+tsc --init
+tsc test.ts --watch
+```
+
+```typescript
+const sumFun = (a: number, b: number): number => a+b;
+
+const answer = sumFun(2, 5);
+
+// boolean
+let isCool: boolean = false;
+// : string, : number, 
+// arrays
+//: string[], : int[] ....
+//: Array<string>
+
+// Object
+let obj: object = {};
+
+//: null, : undefined
+
+// Tuple
+let basket: [string, number];
+basket = ["test", 5]
+
+// Enum
+enum Size {Small = 1, Medium = 2, Large = 3} 
+let sizeName: string = Size[2]; // output medium
+let sizeNumber: number = Size.Small; // output 1
+
+// Void
+let test = (): void => {
+    console.log('Test');
+}
+// never
+let error = (): never => {
+    throw Error('Ops');
+}
+
+// interface
+interface SomeInterface {
+    count: number,
+    type: string,
+    optional?: string
+}
+let SomeFunction = (some: SomeInterface) => {
+    console.log("Test");
+}
+// the line is the same as
+let SomeFunction = (some: {count: number, type: string}) => {
+    console.log("Test");
+}
+// Type assertion 
+let someObject = {} as SomeInterface;
+// Union
+let both: string | number = 3;
+```
+
+Adding typescript to react project
+
+[Git](https://github.com/wmonk/create-react-app-typescript)
+
+#spa-vs-server-side-rendering
+
+In react for SSR
+
+- [Gatsby.js](https://www.gatsbyjs.org/)
+- [Next.js](https://nextjs.org/)
+- [Next.js-second-doc](https://zeit.co/blog/next5)    
+
+#### Next.js
+
+```console
+npm init -y
+npm install next react react-dom
+```
+```javascript
+// in package.json
+"script": {
+    "start": "next"
+}
+```
