@@ -4,20 +4,13 @@ Dev-tools and best practice
 ### Table of Contents
 
 - [SSH](#ssh)
-
 - [PERFORMANCE](#performance)
-
-[REACT](#react)
-
-[WEBPAC-4](#webpack-4)
-
-[PWA](#progressive-web-apps)
-
-[Testing](#testing)
-
-[TypeScript](#type-script)
-
-[SPA vs SSR](#spa-vs-server-side-rendering)
+- [REACT](#react)
+- [WEBPAC-4](#webpack-4)
+- [PWA](#progressive-web-apps)
+- [Testing](#testing)
+- [TypeScript](#type-script)
+- [SPA vs SSR](#spa-vs-server-side-rendering)
 
 # ssh
 
@@ -30,11 +23,11 @@ ssh root@167.99.146.57
 // IP address or host name
 ```
 
-####Symmetrical Encryption
+#### Symmetrical Encryption
 
 Uses one secret key for encryption and decryption.
 
-####Asymmetrical Encryption
+#### Asymmetrical Encryption
 
 Uses two separate keys for encryption and decryption (Public and private).
 
@@ -142,7 +135,7 @@ Remove image metadata - www.verexif.com
 
 [React-check-update-tool](https://github.com/maicki/why-did-you-update)
 
-#react
+# react
 
 [Reac-nice-doc](https://vasanthk.gitbooks.io/react-bits/patterns/19.async-nature-of-setState.html)
 
@@ -375,7 +368,7 @@ const mapDispatchToProps = dispatch => {
 };
 ```
 
-##### React Tools
+#### React Tools
 
 1. [React Router](https://reacttraining.com/react-router/web/example/basic)
 2. [Ramda](https://ramdajs.com/docs/) 
@@ -386,7 +379,7 @@ const mapDispatchToProps = dispatch => {
 7. [React-reselect](https://github.com/reduxjs/reselect)
 8. [Redux Saga](https://github.com/redux-saga/redux-saga)
 
-#webpack-4 
+# webpack-4 
 
 [webpack](https://webpack.js.org/)
 
@@ -459,7 +452,7 @@ module.export = {
 npm start
 ```
 
-#progressive-web-apps
+# progressive-web-apps
 
 [PWA-builder](https://www.pwabuilder.com/)
 
@@ -467,27 +460,27 @@ npm start
 
 [Best-Practic](https://auth0.com/blog/introduction-to-progressive-web-apps-push-notifications-part-3/)
 
-#testing
+# testing
 
-##### Unit Tests
+#### Unit Tests
 
 Tests individual classes or functions
 
-##### Integration Tests
+#### Integration Tests
 
 Testing how different pieces of code work with each other
 
-##### Automation Tests
+#### Automation Tests
 
 Test behavior of the web (selenium test, TestCafe, WebDriver IO)
 
-##### Tools
+#### Tools
 
 - Jasmine (need coverage library) (BDD)
 - Jest (BDD)
 - Mocha (need assertion , mock and code coverage library) (BDD)
 
-### JEST
+#### JEST
 
 [Official wep page](https://jestjs.io/) 
 
@@ -547,20 +540,20 @@ To test components use:
 import { shallow, mount, render } from 'enzyme';
 // look card.test.js
 ```
-##### Snapshot testing
+#### Snapshot testing
 
 ```javascript
 it('Snapshot testing', () => {
     expect(shallow(<Card />)).toMatchSnapshot();
 });
 ```
-##### Code Coverage
+#### Code Coverage
 
 ```console
 npm test -- --coverage
 ```
 
-##### Testing stateful components 
+#### Testing stateful components 
 
 ```javascript
 it('state test', () => {
@@ -573,21 +566,21 @@ it('state test', () => {
 });
 ```
 
-##### Testing connected components 
+#### Testing connected components 
 
 look at MainPage.test.js
 
-##### Testing reducers
+#### Testing reducers
 
 look at reducers.test.js
 
-##### Testing actions
+#### Testing actions
 
 look at actions.test.js 
 
 npm install --save-dev redux-mock-store
 
-#type-script
+# type-script
 
 [TSsetup](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
 
@@ -659,7 +652,7 @@ Adding typescript to react project
 
 [Git](https://github.com/wmonk/create-react-app-typescript)
 
-#spa-vs-server-side-rendering
+# spa-vs-server-side-rendering
 
 In react for SSR
 
