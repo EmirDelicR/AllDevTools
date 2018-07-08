@@ -1,7 +1,9 @@
 # AllDevTools
 Dev-tools and best practice
 
-[PERFORMANCE](#performance)
+### Table of Contents
+
+- [PERFORMANCE](#performance)
 
 [REACT](#react)
 
