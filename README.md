@@ -3,6 +3,8 @@ Dev-tools and best practice
 
 ### Table of Contents
 
+- [ssh](#ssh)
+
 - [PERFORMANCE](#performance)
 
 [REACT](#react)
@@ -17,7 +19,7 @@ Dev-tools and best practice
 
 [SPA vs SSR](#spa-vs-server-side-rendering)
 
-# SSH
+# ssh
 
 How SSH work
 
