@@ -112,7 +112,7 @@ Commands :
 1. Minimize text (JS,CSS,HTML) - Use Webpack or UglifyJS
 2. Minimize Images
 
-###### Images optimizations
+#### Images optimizations
 
 Reduce PNG with TinyPNG
 Reduce JPEG with JPEG-OPTIMIZER
@@ -123,11 +123,11 @@ Remove image metadata - www.verexif.com
 
 [Media Queries Cheat Sheet](http://www.bsidestudios.com/blog/media-queries-common-sizes-cheat-sheet)
 
-###### Critical Render Path
+#### Critical Render Path
 
 [Prefetching](https://css-tricks.com/prefetching-preloading-prebrowsing/)
 
-###### Code Optimizing/Splitting
+#### Code Optimizing/Splitting
 
 [async  or defer ](https://stackoverflow.com/questions/10808109/script-tag-async-defer)
 
