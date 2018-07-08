@@ -3,7 +3,7 @@ Dev-tools and best practice
 
 ### Table of Contents
 
-- [ssh](#ssh)
+- [SSH](#ssh)
 
 - [PERFORMANCE](#performance)
 
