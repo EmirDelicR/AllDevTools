@@ -569,4 +569,4 @@ look at actions.test.js
 
 npm install --save-dev redux-mock-store
 
-// read dock
+# TypeScript
