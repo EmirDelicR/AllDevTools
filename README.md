@@ -493,7 +493,7 @@ it('this is the test', () => {
 npm test
 ```
 
-##### Enzyme
+#### Enzyme
 
 [Enzyme](https://github.com/airbnb/enzyme)
 
@@ -529,3 +529,44 @@ To test components use:
 import { shallow, mount, render } from 'enzyme';
 // look card.test.js
 ```
+##### Snapshot testing
+
+```javascript
+it('Snapshot testing', () => {
+    expect(shallow(<Card />)).toMatchSnapshot();
+});
+```
+##### Code Coverage
+
+```console
+npm test -- --coverage
+```
+
+##### Testing stateful components 
+
+```javascript
+it('state test', () => {
+    const mockColor = 'red';
+    const wrapper = shallow(<Card color={mockColor} />));
+    /* [id="counter"] it is a id of button for example */
+    wrapper.find('[id="counter"]').simulate('click');
+    expect(wrapper.state()).toEqual({ count: 1});
+    expect(wrapper.props().color).toEqual('red');
+});
+```
+
+##### Testing connected components 
+
+look at MainPage.test.js
+
+##### Testing reducers
+
+look at reducers.test.js
+
+##### Testing actions
+
+look at actions.test.js 
+
+npm install --save-dev redux-mock-store
+
+// read dock
