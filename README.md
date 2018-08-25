@@ -666,4 +666,5 @@ npm install next react react-dom
 "script": {
     "start": "next"
 }
+// create folder pages (must be in root dir with index.js)
 ```
