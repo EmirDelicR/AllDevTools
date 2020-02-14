@@ -1,4 +1,5 @@
 # AllDevTools
+
 Dev-tools and best practice
 
 ### Table of Contents
@@ -6,7 +7,7 @@ Dev-tools and best practice
 - [SSH](#ssh)
 - [PERFORMANCE](#performance)
 - [REACT](#react)
-- [WEBPAC-4](#webpack-4)
+- [WEBPACK-4](#webpack-4)
 - [PWA](#progressive-web-apps)
 - [Testing](#testing)
 - [TypeScript](#type-script)
@@ -16,7 +17,7 @@ Dev-tools and best practice
 
 How SSH work
 
-To connect to extrnal server/host ssh {user}@{host}
+To connect to external server/host ssh {user}@{host}
 
 ```code
 ssh root@167.99.146.57
@@ -39,7 +40,6 @@ Uses two separate keys for encryption and decryption (Public and private).
 
 [Elliptic Curves](https://www.youtube.com/watch?v=NF1pwjL9-DE)
 
-
 #### SSH functions
 
 ```code
@@ -48,15 +48,15 @@ The SSH command consists of 3 distinct parts:
 	// {user} represents the account you want to access.
 	// {host} refers to the computer you want to access.
 Commands :
-	ssh <virtualMaschine>         	--> login to virtual machine
+	ssh <virtualMachine>         	--> login to virtual machine
 	ssh emir@virtualmachine.com
 	exit 			      	--> exit / logout
 
 	// upload app on server
 	rsync -av . emir@virtualmachine.com:~/newapp    -> ~ is home directory
-	
+
 	// Password list of ssh
-	
+
 	// Local machine
 	cd .ssh
 	ssh-keygen -C "emir@test.com"
@@ -68,18 +68,18 @@ Commands :
 
 	cat id_rsa.pub | pbcopy
 	// this copy key to clipboard
-        // if throwe error use 
-        sudo apt-get install -y xclip
-        sudo vim ~/.zshrc
-        //Set alias
-        //alias pbcopy='xclip -selection clipboard'
-        //alias pbpaste='xclip -selection clipboard -o'
-        // stil have problem use:
-        xclip -selection clipboard id_rsa.pub
-        ssh-add 
+    // if throw error use
+    sudo apt-get install -y xclip
+    sudo vim ~/.zshrc
+    //Set alias
+    //alias pbcopy='xclip -selection clipboard'
+    //alias pbpaste='xclip -selection clipboard -o'
+    // still have problem use:
+    xclip -selection clipboard id_rsa.pub
+    ssh-add
 
-	// Remote machine 
-	// make on youre machin ssh file
+	// Remote machine
+	// make on your machine ssh file
 	mkdir .ssh
 	cd .ssh
 	nano authirused_keys
@@ -92,22 +92,22 @@ Commands :
 
 	// backup config file
 	sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
-	
+
 	// change config setup
 	sudo nano /etc/ssh/sshd_config
 
-	// in nano find 
-	#PasswordAuthentication yes 
+	// in nano find
+	#PasswordAuthentication yes
 	// and set to
 	PasswordAuthentication no
 
 	// restart server
-        sudo service ssh restart	
+    sudo service ssh restart
 ```
 
 # performance
 
-#### Network 
+#### Network
 
 1. Minimize text (JS,CSS,HTML) - Use Webpack or UglifyJS
 2. Minimize Images
@@ -125,11 +125,11 @@ Remove image metadata - www.verexif.com
 
 #### Critical Render Path
 
-[Prefetching](https://css-tricks.com/prefetching-preloading-prebrowsing/)
+[Perfecting](https://css-tricks.com/prefetching-preloading-prebrowsing/)
 
 #### Code Optimizing/Splitting
 
-[async  or defer ](https://stackoverflow.com/questions/10808109/script-tag-async-defer)
+[async or defer](https://stackoverflow.com/questions/10808109/script-tag-async-defer)
 
 [code-splitting](https://reactjs.org/docs/code-splitting.html)
 
@@ -137,7 +137,7 @@ Remove image metadata - www.verexif.com
 
 # react
 
-[Reac-nice-doc](https://vasanthk.gitbooks.io/react-bits/patterns/19.async-nature-of-setState.html)
+[React-nice-doc](https://vasanthk.gitbooks.io/react-bits/patterns/19.async-nature-of-setState.html)
 
 [Components](https://mdbootstrap.com/react/components/breadcrumb/)
 
@@ -176,7 +176,7 @@ const logo = ( props ) => (
     </div>
 );
 
-export default logo; 
+export default logo;
 
 <----------------------------------------->
 // Components with state
@@ -213,10 +213,10 @@ import { robots } from '../../../data/robots';
 const CardList = () => {
     const cardsArray = robots.map((robot) => {
         return (
-			<Card 
-				key={robot.id} 
-				id={robot.id} 
-				name={robot.name} 
+			<Card
+				key={robot.id}
+				id={robot.id}
+				name={robot.name}
 				email={robot.email} />
 		)
     });
@@ -232,39 +232,35 @@ export default CardList;
 
 ```
 
-#### Error Boundry
+#### Error Boundary
 
 ```javascript
 import React, { Component } from 'react';
 
-class ErrorBoundry extends Component {
+class ErrorBoundary extends Component {
   state = {
     hasError: false
-  }
+  };
 
   componentDidCatch(error, info) {
-      this.setState({hasError: true})
+    this.setState({ hasError: true });
   }
   render() {
-    if(this.state.hasError) {
-        return <h1>Upps. Error occured.</h1>
+    if (this.state.hasError) {
+      return <h1>Ups. Error occurred.</h1>;
     }
-    return this.props.children
-
+    return this.props.children;
   }
 }
 
-export default ErrorBoundry;
+export default ErrorBoundary;
 ```
 
 #### Redux
 
 -Good for managing large state.
 -Useful for sharing data between containers
--Predictable state management using the 3 principles:
-	1. Single source of truth - one single big object
-	2. State is read only 
-	3. Changes using pure functions
+-Predictable state management using the 3 principles: 1. Single source of truth - one single big object 2. State is read only 3. Changes using pure functions
 
 Flux pattern
 
@@ -283,14 +279,14 @@ import { createStore, applyMiddleware } from 'redux';
 
 // middleware
 const logger = store => {
-    return next => {
-        return action => {
-            console.log('[Middleware] Dispatching: ', action);
-            const result = next(action);
-            console.log('[Middleware] next state: ', store.getState());
-            return result;
-        }
-    }
+  return next => {
+    return action => {
+      console.log('[Middleware] Dispatching: ', action);
+      const result = next(action);
+      console.log('[Middleware] next state: ', store.getState());
+      return result;
+    };
+  };
 };
 
 // Store
@@ -356,7 +352,7 @@ const mapStateToProps = state => {
     searchField: state.search.searchField,
     robots: state.request.robots,
     isPending: state.request.isPending,
-    errro: state.request.error
+    error: state.request.error
   }
 };
 
@@ -371,7 +367,7 @@ const mapDispatchToProps = dispatch => {
 #### React Tools
 
 1. [React Router](https://reacttraining.com/react-router/web/example/basic)
-2. [Ramda](https://ramdajs.com/docs/) 
+2. [Ramda](https://ramdajs.com/docs/)
 3. [Lodash](https://lodash.com/docs/)
 4. [Gatsby.js](https://www.gatsbyjs.org/)
 5. [Material-ui](https://material-ui.com/getting-started/supported-components/)
@@ -379,13 +375,14 @@ const mapDispatchToProps = dispatch => {
 7. [React-reselect](https://github.com/reduxjs/reselect)
 8. [Redux Saga](https://github.com/redux-saga/redux-saga)
 
-# webpack-4 
+# webpack-4
 
 [webpack](https://webpack.js.org/)
 
 [eslint](https://eslint.org/docs/user-guide/configuring#configuration-file-formats)
 
 [Webpack config tool](https://webpack.jakoblind.no/)
+
 ```console
 npm install --save-dev webpack webpack-dev-server webpack-cli
 npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-stage-2 babel-preset-react
@@ -445,9 +442,10 @@ module.export = {
    "rules": {
        "no-console": "error"
    },
-   "extends": ["airbnb-base"] 
+   "extends": ["airbnb-base"]
 }
 ```
+
 ```console
 npm start
 ```
@@ -458,7 +456,7 @@ npm start
 
 [Favicon Generator](https://realfavicongenerator.net/)
 
-[Best-Practic](https://auth0.com/blog/introduction-to-progressive-web-apps-push-notifications-part-3/)
+[Best-Practice](https://auth0.com/blog/introduction-to-progressive-web-apps-push-notifications-part-3/)
 
 # testing
 
@@ -482,7 +480,7 @@ Test behavior of the web (selenium test, TestCafe, WebDriver IO)
 
 #### JEST
 
-[Official wep page](https://jestjs.io/) 
+[Official wep page](https://jestjs.io/)
 
 [Jest Cheat Sheet](https://github.com/sapegin/jest-cheat-sheet)
 
@@ -535,25 +533,29 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 */
 ```
+
 To test components use:
+
 ```javascript
 import { shallow, mount, render } from 'enzyme';
 // look card.test.js
 ```
+
 #### Snapshot testing
 
 ```javascript
 it('Snapshot testing', () => {
-    expect(shallow(<Card />)).toMatchSnapshot();
+  expect(shallow(<Card />)).toMatchSnapshot();
 });
 ```
+
 #### Code Coverage
 
 ```console
 npm test -- --coverage
 ```
 
-#### Testing stateful components 
+#### Testing state-ful components
 
 ```javascript
 it('state test', () => {
@@ -566,7 +568,7 @@ it('state test', () => {
 });
 ```
 
-#### Testing connected components 
+#### Testing connected components
 
 look at MainPage.test.js
 
@@ -576,13 +578,13 @@ look at reducers.test.js
 
 #### Testing actions
 
-look at actions.test.js 
+look at actions.test.js
 
 npm install --save-dev redux-mock-store
 
 # type-script
 
-[TSsetup](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
+[TS setup](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support)
 
 [Doc](https://basarat.gitbooks.io/typescript/docs/why-typescript.html)
 
@@ -595,13 +597,13 @@ tsc test.ts --watch
 ```
 
 ```typescript
-const sumFun = (a: number, b: number): number => a+b;
+const sumFun = (a: number, b: number): number => a + b;
 
 const answer = sumFun(2, 5);
 
 // boolean
 let isCool: boolean = false;
-// : string, : number, 
+// : string, : number,
 // arrays
 //: string[], : int[] ....
 //: Array<string>
@@ -613,36 +615,40 @@ let obj: object = {};
 
 // Tuple
 let basket: [string, number];
-basket = ["test", 5]
+basket = ['test', 5];
 
 // Enum
-enum Size {Small = 1, Medium = 2, Large = 3} 
+enum Size {
+  Small = 1,
+  Medium = 2,
+  Large = 3
+}
 let sizeName: string = Size[2]; // output medium
 let sizeNumber: number = Size.Small; // output 1
 
 // Void
 let test = (): void => {
-    console.log('Test');
-}
+  console.log('Test');
+};
 // never
 let error = (): never => {
-    throw Error('Ops');
-}
+  throw Error('Ops');
+};
 
 // interface
 interface SomeInterface {
-    count: number,
-    type: string,
-    optional?: string
+  count: number;
+  type: string;
+  optional?: string;
 }
 let SomeFunction = (some: SomeInterface) => {
-    console.log("Test");
-}
+  console.log('Test');
+};
 // the line is the same as
-let SomeFunction = (some: {count: number, type: string}) => {
-    console.log("Test");
-}
-// Type assertion 
+let SomeFunction = (some: { count: number; type: string }) => {
+  console.log('Test');
+};
+// Type assertion
 let someObject = {} as SomeInterface;
 // Union
 let both: string | number = 3;
@@ -658,7 +664,7 @@ In react for SSR
 
 - [Gatsby.js](https://www.gatsbyjs.org/)
 - [Next.js](https://nextjs.org/)
-- [Next.js-second-doc](https://zeit.co/blog/next5)    
+- [Next.js-second-doc](https://zeit.co/blog/next5)
 
 #### Next.js
 
@@ -666,6 +672,7 @@ In react for SSR
 npm init -y
 npm install next react react-dom
 ```
+
 ```javascript
 // in package.json
 "script": {
