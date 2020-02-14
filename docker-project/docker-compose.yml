@@ -1,0 +1,63 @@
+version: '3.6'
+
+services:
+  # BACKEND SERVICE
+  backend-api:
+    # give container name
+    container_name: backend
+    # add image
+    # image: node
+    # build image from Dockerfile
+    build: ./
+    # command to execute
+    command: npm start
+    # set working directory
+    working_dir: /usr/src/my-app
+    # set posts
+    ports:
+      - '3000:3000'
+    # set volumes allow access to file system
+    volumes:
+      # map current directory to directory in container (use this to update container as you update local files)
+      - ./:/usr/src/my-app
+    # expose network to communicated with other services
+    networks:
+      - backnet
+    # set environment like .env
+    environment:
+      # access as process.env.DB_HOST in code
+      DB_HOST: db
+
+  # DATABASE SERVICE
+  db:
+    container_name: database
+    # Build db from postgres folder Dockerfile
+    build: ./postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - backnet
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: test
+  # redis:
+  #   container_name: redis
+  #   image: redis
+  #   ports:
+  #     - '6379'
+  #   networks:
+  #     - backnet
+  #   deploy:
+  #     replicas: 2
+  #     update_config:
+  #       parallelism: 2
+  #       delay: 10s
+  #     restart_policy:
+  #       condition: on-failure
+
+networks:
+  # frontnet:
+  backnet:
+# volumes:
+#   db-data:

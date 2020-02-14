@@ -12,6 +12,9 @@ Dev-tools and best practice
 - [Testing](#testing)
 - [TypeScript](#type-script)
 - [SPA vs SSR](#spa-vs-server-side-rendering)
+- [PostgreSql](#postgersql)
+- [Docker](#docker)
+- [Redis](#redis)
 
 # ssh
 
@@ -680,3 +683,222 @@ npm install next react react-dom
 }
 // create folder pages (must be in root dir with index.js)
 ```
+
+# postgresql
+
+Linux:
+
+Installing PostgreSQL along with a GUI (eg. pgAdmin), [Download Link](https://www.postgresql.org/download/)
+
+To start, stop, restart PostgreSQL in Linux is:
+
+```console
+sudo systemctl start postgresql     # starts the server
+sudo systemctl stop postgresql      # stops it
+sudo systemctl restart postgresql   # restart it
+sudo systemctl status postgresql    # check the server's status
+```
+
+The "createdb test " command and the "psql 'test' " command are the same.
+
+When it's first installed, PostgreSQL just has the 'postgres' user, and the way to initially enter PostgreSQL is by typing sudo su - postgres , and then psql.
+
+```console
+createdb test
+psql 'test'
+CREATE USER your-user-name-here WITH SUPERUSER;
+```
+
+and we can verify that he was created with \du.
+Now we can exit by typing \q and then exit
+
+Lastly, with pgAdmin4 we need to create a connection with the server the first time we use it,
+and this is done by right-clicking 'Servers' on the left pane, and choosing 'Create' > 'Server'.
+We give our server a name, and in the 'Connection' tab we type in 'localhost' as the host, and press 'Save'.
+
+# docker
+
+Linux install
+
+[Docker](https://docs.docker.com/engine/reference/commandline/build/)
+
+[Docker Hub](https://hub.docker.com/)
+
+```console
+# install
+sudo apt install docker.io
+
+# test by running
+sudo docker run hello-world
+# to enter into container
+sudo docker run -it hello-world
+# to run in background
+sudo docker run -it -d hello-world
+
+# list all containers
+sudo docker ps -a
+
+# stop containers
+sudo docker stop <container id>
+```
+
+Make Dockerfile
+
+```js
+FROM node
+
+WORKDIR /usr/src/my-app
+
+COPY ./ ./
+
+RUN npm i
+
+CMD ["/bin/bash"]
+```
+
+```console
+# This will point to Dockerfile automatically
+sudo docker build -t container_tag .
+```
+
+To run without sudo
+
+```console
+sudo service docker status
+sudo ls -la /var/run/docker.sock
+
+sudo groupadd docker
+
+sudo usermod -aG docker ${USER}
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
+sudo chmod 666 /var/run/docker.sock
+```
+
+Test
+
+```console
+docker run hello-world
+```
+
+### Docker Compose
+
+[Install](https://linuxize.com/post/how-to-install-and-use-docker-compose-on-ubuntu-18-04/)
+
+[Version and Example](https://docs.docker.com/compose/compose-file/)
+
+```console
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+```
+
+Make docker-compose.yml file
+
+```yml
+version: '3.6'
+
+services:
+  backend-api:
+    # give container name
+    container_name: backend
+    # add image
+    # image: node
+    # build image from Dockerfile
+    build: ./
+    # command to execute
+    command: npm start
+    # set working directory
+    working_dir: /app
+    # set posts
+    ports:
+      - '3000:3000'
+    # set volumes allow access to file system
+    volumes:
+      # map current directory to directory in container (use this to update container as you update local files)
+      - ./:/usr/src/my-app
+    # expose network to communicated with other services
+    networks:
+      - backnet
+    # set environment like .env
+    environment:
+      # access as process.env.DB_HOST in code
+      DB_HOST: db
+
+networks:
+  backnet:
+```
+
+```console
+docker-compose --help
+
+# use --build only for first time
+docker-compose up --build
+```
+
+If you get error
+
+**_ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?_**
+
+do this
+
+```console
+sudo service docker status
+sudo ls -la /var/run/docker.sock
+
+sudo groupadd docker
+
+sudo usermod -aG docker ${USER}
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
+sudo chmod 666 /var/run/docker.sock
+```
+
+Then you can run specific service
+
+```console
+docker-compose run backend-api
+```
+
+To stop container
+
+```console
+docker-compose down
+```
+
+To execute command or enter bash in container
+
+```console
+docker-compose up -d
+docker-compose exec -d backend-api bash
+```
+
+Adding db to .yml file
+
+```yml
+# DATABASE SERVICE
+db:
+  container_name: database
+  image: postgres
+  ports:
+    - '5432:5432'
+  networks:
+    - backnet
+  environment:
+    POSTGRES_PASSWORD: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_DB: test
+```
+
+If say that post is already in use
+
+```console
+sudo service postgresql stop
+```
+
+# redis
+
+[Redis](https://redis.io/documentation)
+
+Redis is NoSql in memory DB (sue for small pieces of data that are not important)

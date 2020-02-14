@@ -1,0 +1,8 @@
+BEGIN TRANSACTION;
+
+CREATE TABLE login (
+    id serial PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+COMMIT;
