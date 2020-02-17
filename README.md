@@ -15,6 +15,7 @@ Dev-tools and best practice
 - [PostgreSql](#postgersql)
 - [Docker](#docker)
 - [Redis](#redis)
+- [Sessions + JWT](#jwt)
 
 # ssh
 
@@ -872,6 +873,8 @@ To execute command or enter bash in container
 ```console
 docker-compose up -d
 docker-compose exec -d backend-api bash
+
+docker-compose exec redis redis-cli
 ```
 
 Adding db to .yml file
@@ -901,4 +904,198 @@ sudo service postgresql stop
 
 [Redis](https://redis.io/documentation)
 
+[Node Redis](https://www.npmjs.com/package/redis)
+
 Redis is NoSql in memory DB (sue for small pieces of data that are not important)
+
+```console
+# Install
+sudo apt-get update
+
+sudo apt-get install redis-server
+
+# Check is working
+redis-cli
+redis 127.0.0.1:6379> ping
+Response: PONG
+
+# To start server
+redis-server
+```
+
+Redis commands
+
+[Command list](https://redis.io/commands)
+
+```console
+
+SET key value
+
+GET key
+
+EXISTS key
+
+DEL key
+
+# Multi get / set
+MSET a 2 b 5
+
+MGET a b
+
+# Work with hashes
+HMSET user id 45 name "Test"
+
+HGETALL user
+
+HGET user id
+
+# Working with lists
+LPUSH list_name value # Push to left
+
+RPUSH list_name value # Push to right
+
+LRANGE list_name 0 1
+
+RPOP list_name # pop last item
+LPOP list_name # pop first item
+
+# Working with sets (same as list without duplicates)
+SADD set_name 1 2 3 4 5
+
+SMEMBERS set_name
+
+SISMEMBER set_name value
+
+# Sorted sets
+ZADD team 50 "Test_1"
+ZADD team 40 "Test_2"
+
+ZRANGE team 0 1
+# Test_2
+# Test_1
+```
+
+# jwt
+
+[JWT](https://jwt.io/)
+
+[JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)
+
+[JWT Git](https://github.com/auth0/node-jsonwebtoken)
+
+handle token in node.js
+
+```js
+/* create an route */
+const signIn = require('./controllers/signIn');
+const db = knex({
+  /* connection */
+});
+
+app.post('/signIn', signIn.signInAuth(db, bcrypt));
+```
+
+```js
+/* Handle signInAuth function in signIn.js file */
+const signInAuth = (db, bcrypt) => async (req, res) => {
+  const { authorization } = req.headers;
+
+  if (authorization) {
+    getTokenAuthId(authorization);
+  } else {
+    try {
+      const user = await signIn(db, bcrypt, req, res);
+      const session = await createSession(user)
+      res.json(session);
+    }catch err {
+      res.status(400).json(err)
+    }
+  }
+};
+
+module.exports = {
+  signInAuth: signInAuth
+};
+```
+
+```js
+/* Handle signIn function in signIn.js file (This is just simple version) */
+const signIn = async (db, bcrypt, req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return Promise.reject('incorrect form submission!');
+  }
+
+  try {
+    const data = await db
+      .select('email', 'hash')
+      .from('login')
+      .where('email', '=', email);
+  } catch {
+    Promise.reject('wrong credentials');
+  }
+
+  if (bcrypt.compareSync(password, data[0].hash)) {
+    try {
+      return new Promise((resolve, reject) => {
+        const user = await db
+          .select('*')
+          .from('users')
+          .where('email', '=', email);
+
+        resole(user[0]);
+      })
+    } catch {
+      Promise.reject('no user');
+    }
+  } else {
+    Promise.reject('wrong credentials');
+  }
+};
+```
+
+```js
+/* Helper function getTokenAuthId */
+
+const getTokenAuthId = token => {
+  return redisClient.get(token, (err, reply) => {
+    if (err || !reply) {
+      // handle response
+      return res.status(400).json('unauthorized');
+    }
+
+    return res.json({ id: reply });
+  });
+};
+```
+
+```js
+/* Helper function createSession work with JWT  */
+
+const redis = require('redis');
+const redisClient = redis.createClient();
+
+const setToken = (key, value) => {
+  return Promise.resolve(redisClient.set(key, value));
+};
+
+const createSession = async user => {
+  const jwt = require('jsonwebtoken');
+  const { email, id } = user;
+  const token = await jwt.sign({ email }, 'JWT-secret', {
+    expiresIn: '2 days'
+  });
+
+  await Promise.resolve(redisClient.set(token, id));
+
+  return { userId: id, token };
+};
+```
+
+**_ On client side save token on session or localStorage or cookie depend on team decision_**
+
+```js
+windows.sessionStorage.setItem('token', token);
+windows.localStorage.setItem('token', token);
+```
