@@ -119,8 +119,11 @@ Commands :
 #### Images optimizations
 
 Reduce PNG with TinyPNG
+
 Reduce JPEG with JPEG-OPTIMIZER
+
 Use CDNs like imgix - www.imgix.com
+
 Remove image metadata - www.verexif.com
 
 [Media Queries](https://css-tricks.com/snippets/css/media-queries-for-standard-devices/)
