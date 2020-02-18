@@ -139,6 +139,12 @@ Remove image metadata - www.verexif.com
 
 [React-check-update-tool](https://github.com/maicki/why-did-you-update)
 
+#### Database Scaling
+
+1. Identify Inefficient Queries
+2. Increase Memory
+3. Vertical Scaling (Redis)
+
 # react
 
 [React-nice-doc](https://vasanthk.gitbooks.io/react-bits/patterns/19.async-nature-of-setState.html)
