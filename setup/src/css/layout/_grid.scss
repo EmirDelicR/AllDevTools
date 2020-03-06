@@ -1,0 +1,37 @@
+.page-grid-layout {
+  background-color: cornflowerblue;
+  color: cornsilk;
+
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: auto auto;
+
+  grid-template-areas:
+    'nav nav nav'
+    'main main aside'
+    'footer footer footer';
+
+  .main-nav {
+    grid-area: nav;
+  }
+
+  .main-section {
+    height: auto;
+    grid-area: main;
+
+    img {
+      @extend %img-placeholder-extension;
+    }
+  }
+
+  .main-aside {
+    grid-area: aside;
+    img {
+      @extend %img-placeholder-extension;
+    }
+  }
+
+  .main-footer {
+    grid-area: footer;
+  }
+}

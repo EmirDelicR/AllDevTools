@@ -1,0 +1,13 @@
+.main-nav {
+  height: 5vh;
+  padding: 20px;
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+
+    li {
+      @extend %all-links-extension;
+    }
+  }
+}

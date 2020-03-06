@@ -1,0 +1,15 @@
+%all-links-extension {
+  cursor: pointer;
+  color: $nav-link;
+  text-decoration: none;
+  outline: 0;
+
+  &:hover {
+    color: $nav-link-hover;
+  }
+}
+
+%img-placeholder-extension {
+  min-height: 120px;
+  min-width: 120px;
+}
